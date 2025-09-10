@@ -105,7 +105,7 @@ public class AuthService : IAuthService
         await _context.SaveChangesAsync();
     }
 
-    public async Task<string> GenerateJwtTokenAsync(int userId, string email, string role)
+    public Task<string> GenerateJwtTokenAsync(int userId, string email, string role)
     {
         var jwtSettings = _configuration.GetSection("Jwt");
         var key = Encoding.ASCII.GetBytes(jwtSettings["Key"]!);
@@ -126,6 +126,6 @@ public class AuthService : IAuthService
 
         var tokenHandler = new JwtSecurityTokenHandler();
         var token = tokenHandler.CreateToken(tokenDescriptor);
-        return tokenHandler.WriteToken(token);
+        return Task.FromResult(tokenHandler.WriteToken(token));
     }
 }

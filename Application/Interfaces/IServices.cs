@@ -20,3 +20,12 @@ public interface IEventService
     Task<int> CreateEventAsync(string name, string description, DateTime dateAt, int createdBy);
     Task<IEnumerable<dynamic>> GetEventsAsync();
 }
+
+public interface IExitRequestService
+{
+    Task<int> CreateExitRequestAsync(int residentId, int? tutorId, string reason, DateTime requestDate);
+    Task UpdateExitRequestStatusAsync(int requestId, string status, string approvedBy, int approverId);
+    Task ProcessExitAsync(int requestId, int guardId);
+    Task ProcessReturnAsync(int requestId, int guardId);
+    Task<IEnumerable<dynamic>> GetExitRequestsAsync();
+}

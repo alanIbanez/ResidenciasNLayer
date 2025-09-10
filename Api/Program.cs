@@ -44,6 +44,7 @@ builder.Services.AddAuthorization();
 // Application services
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IEventService, EventService>();
+builder.Services.AddScoped<IExitRequestService, ExitRequestService>();
 builder.Services.AddScoped<INotificationService, ExpoNotificationService>();
 builder.Services.AddHttpClient();
 

@@ -46,3 +46,15 @@ public class EventResponseDto
     public string created_by_name { get; set; } = string.Empty;
     public DateTime createdat { get; set; }
 }
+
+public class CreateExitRequestDto
+{
+    public int? tutorid { get; set; }
+    public string reason { get; set; } = string.Empty;
+    public DateTime requestdate { get; set; }
+}
+
+public class UpdateExitRequestDto
+{
+    public string status { get; set; } = string.Empty; // approved, rejected
+}
