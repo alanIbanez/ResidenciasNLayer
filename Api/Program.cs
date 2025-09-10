@@ -48,6 +48,7 @@ builder.Services.AddAuthentication(x =>
 });
 
 // Repository registrations
+builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<ITutorRepository, TutorRepository>();
 builder.Services.AddScoped<IResidentRepository, ResidentRepository>();
@@ -58,6 +59,8 @@ builder.Services.AddScoped<IUserTokenRepository, UserTokenRepository>();
 // Service registrations
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IExitRequestService, ExitRequestService>();
+builder.Services.AddScoped<IResidentService, ResidentService>();
+builder.Services.AddScoped<IAttendanceService, AttendanceService>();
 builder.Services.AddScoped<IPasswordService, PasswordService>();
 builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<IPushNotificationService, PushNotificationService>();
