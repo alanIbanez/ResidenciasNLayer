@@ -1,0 +1,6 @@
+@ResidenciasNLayer.API_HostAddress = http://localhost:5276
+
+GET {{ResidenciasNLayer.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

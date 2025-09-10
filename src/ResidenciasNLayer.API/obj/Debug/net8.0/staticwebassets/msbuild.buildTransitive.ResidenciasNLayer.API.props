@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="../buildMultiTargeting/ResidenciasNLayer.API.props" />
+</Project>
