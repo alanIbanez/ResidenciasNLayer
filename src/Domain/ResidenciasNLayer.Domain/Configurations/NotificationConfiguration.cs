@@ -24,6 +24,14 @@ public class NotificationConfiguration : IEntityTypeConfiguration<Notification>
             .IsRequired()
             .HasMaxLength(1000);
         
+        builder.Property(n => n.SentAt)
+            .IsRequired()
+            .HasDefaultValueSql("now()");
+        
+        builder.Property(n => n.IsRead)
+            .IsRequired()
+            .HasDefaultValue(false);
+        
         builder.Property(n => n.Status)
             .HasMaxLength(50);
         

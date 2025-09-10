@@ -33,6 +33,16 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
         builder.Property(u => u.PushToken)
             .HasMaxLength(500);
         
+        builder.Property(u => u.IsActive)
+            .IsRequired()
+            .HasDefaultValue(true);
+        
+        builder.Property(u => u.CreatedAt)
+            .IsRequired()
+            .HasDefaultValueSql("now()");
+        
+        builder.Property(u => u.UpdatedAt);
+        
         builder.HasIndex(u => u.Username)
             .IsUnique();
         
