@@ -1,6 +1,18 @@
+using Microsoft.EntityFrameworkCore;
+using ResidenciasNLayer.Application.Services;
+using ResidenciasNLayer.Infrastructure.Data;
+using ResidenciasNLayer.Infrastructure.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
+// Add Entity Framework
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+// Add application services
+builder.Services.AddScoped<IDeviceService, DeviceService>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

@@ -1,3 +1,0 @@
-﻿<Project>
-  <Import Project="../build/ResidenciasNLayer.API.props" />
-</Project>
