@@ -16,9 +16,14 @@ builder.Services.AddDbContext<ResidenciasDbContext>(options =>
 // Register repositories
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IExitRepository, ExitRepository>();
+builder.Services.AddScoped<INotificationRepository, NotificationRepository>();
+builder.Services.AddScoped<IAttendanceRepository, AttendanceRepository>();
 
 // Register services
 builder.Services.AddScoped<IExitAuthorizationPolicy, ExitAuthorizationPolicy>();
+builder.Services.AddScoped<IExitService, ExitService>();
+builder.Services.AddScoped<INotificationService, NotificationService>();
+builder.Services.AddScoped<IAttendanceService, AttendanceService>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
