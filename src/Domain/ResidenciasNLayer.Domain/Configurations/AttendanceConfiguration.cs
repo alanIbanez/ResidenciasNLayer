@@ -12,11 +12,18 @@ public class AttendanceConfiguration : IEntityTypeConfiguration<Attendance>
         
         builder.HasKey(a => a.Id);
         
+        builder.Property(a => a.OccurredAt)
+            .IsRequired();
+        
         builder.Property(a => a.Type)
-            .HasMaxLength(100);
+            .HasMaxLength(50);
+        
+        builder.Property(a => a.RegisteredAt)
+            .IsRequired()
+            .HasDefaultValueSql("now()");
         
         builder.Property(a => a.Notes)
-            .HasMaxLength(500);
+            .HasMaxLength(1000);
         
         // Foreign key relationships
         builder.HasOne(a => a.Resident)

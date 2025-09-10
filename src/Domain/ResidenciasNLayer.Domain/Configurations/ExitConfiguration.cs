@@ -12,6 +12,19 @@ public class ExitConfiguration : IEntityTypeConfiguration<Exit>
         
         builder.HasKey(e => e.Id);
         
+        builder.Property(e => e.PlannedDepartureAt)
+            .IsRequired();
+        
+        builder.Property(e => e.PlannedReturnAt)
+            .IsRequired();
+        
+        builder.Property(e => e.ActualDepartureAt);
+        
+        builder.Property(e => e.ActualReturnAt);
+        
+        builder.Property(e => e.RequestedAt)
+            .HasDefaultValueSql("now()");
+        
         builder.Property(e => e.Notes)
             .HasMaxLength(1000);
         
