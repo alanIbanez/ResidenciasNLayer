@@ -1,0 +1,12 @@
+/home/runner/work/ResidenciasNLayer/ResidenciasNLayer/Core/bin/Debug/net8.0/ResidenciasNLayer.Core.deps.json
+/home/runner/work/ResidenciasNLayer/ResidenciasNLayer/Core/bin/Debug/net8.0/ResidenciasNLayer.Core.dll
+/home/runner/work/ResidenciasNLayer/ResidenciasNLayer/Core/bin/Debug/net8.0/ResidenciasNLayer.Core.pdb
+/home/runner/work/ResidenciasNLayer/ResidenciasNLayer/Core/obj/Debug/net8.0/ResidenciasNLayer.Core.GeneratedMSBuildEditorConfig.editorconfig
+/home/runner/work/ResidenciasNLayer/ResidenciasNLayer/Core/obj/Debug/net8.0/ResidenciasNLayer.Core.AssemblyInfoInputs.cache
+/home/runner/work/ResidenciasNLayer/ResidenciasNLayer/Core/obj/Debug/net8.0/ResidenciasNLayer.Core.AssemblyInfo.cs
+/home/runner/work/ResidenciasNLayer/ResidenciasNLayer/Core/obj/Debug/net8.0/ResidenciasNLayer.Core.csproj.CoreCompileInputs.cache
+/home/runner/work/ResidenciasNLayer/ResidenciasNLayer/Core/obj/Debug/net8.0/ResidenciasNLayer.Core.sourcelink.json
+/home/runner/work/ResidenciasNLayer/ResidenciasNLayer/Core/obj/Debug/net8.0/ResidenciasNLayer.Core.dll
+/home/runner/work/ResidenciasNLayer/ResidenciasNLayer/Core/obj/Debug/net8.0/refint/ResidenciasNLayer.Core.dll
+/home/runner/work/ResidenciasNLayer/ResidenciasNLayer/Core/obj/Debug/net8.0/ResidenciasNLayer.Core.pdb
+/home/runner/work/ResidenciasNLayer/ResidenciasNLayer/Core/obj/Debug/net8.0/ref/ResidenciasNLayer.Core.dll
