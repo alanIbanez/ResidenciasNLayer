@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ResidenciasNLayer.Application.Interfaces;
 using ResidenciasNLayer.Domain.Entities;
@@ -18,6 +19,7 @@ public class ExitsController : ControllerBase
     }
 
     [HttpGet]
+    [Authorize]
     public async Task<ActionResult<IEnumerable<Exit>>> GetExits(
         [FromQuery] int? residentId = null,
         [FromQuery] int? exitStatusId = null,
@@ -29,6 +31,7 @@ public class ExitsController : ControllerBase
     }
 
     [HttpGet("{id}")]
+    [Authorize]
     public async Task<ActionResult<Exit>> GetExit(int id)
     {
         var exit = await _exitService.GetByIdAsync(id);
@@ -39,6 +42,7 @@ public class ExitsController : ControllerBase
     }
 
     [HttpPost]
+    [Authorize(Policy = "ResidenteOnly")]
     public async Task<ActionResult<Exit>> RequestExit([FromBody] ExitRequestDto request)
     {
         try
@@ -59,6 +63,7 @@ public class ExitsController : ControllerBase
     }
 
     [HttpPost("{id}/approve")]
+    [Authorize(Policy = "PreceptorOrTutor")]
     public async Task<ActionResult<Exit>> ApproveExit(int id, [FromBody] ApprovalDto approval)
     {
         try
@@ -73,6 +78,7 @@ public class ExitsController : ControllerBase
     }
 
     [HttpPost("{id}/reject")]
+    [Authorize(Policy = "PreceptorOrTutor")]
     public async Task<ActionResult<Exit>> RejectExit(int id, [FromBody] RejectionDto rejection)
     {
         try
@@ -87,6 +93,7 @@ public class ExitsController : ControllerBase
     }
 
     [HttpPost("{id}/cancel")]
+    [Authorize]
     public async Task<ActionResult<Exit>> CancelExit(int id, [FromBody] CancellationDto cancellation)
     {
         try
@@ -101,6 +108,7 @@ public class ExitsController : ControllerBase
     }
 
     [HttpPost("{id}/guard/departure")]
+    [Authorize(Policy = "GuardiaOnly")]
     public async Task<ActionResult<Exit>> RecordDeparture(int id, [FromBody] GuardActionDto action)
     {
         try
@@ -115,6 +123,7 @@ public class ExitsController : ControllerBase
     }
 
     [HttpPost("{id}/guard/return")]
+    [Authorize(Policy = "GuardiaOnly")]
     public async Task<ActionResult<Exit>> RecordReturn(int id, [FromBody] GuardActionDto action)
     {
         try

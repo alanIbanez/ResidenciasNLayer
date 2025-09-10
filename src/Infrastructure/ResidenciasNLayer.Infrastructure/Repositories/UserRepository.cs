@@ -43,6 +43,14 @@ public class UserRepository : IUserRepository
         return user;
     }
 
+    public async Task<IEnumerable<User>> GetAllAsync()
+    {
+        return await _context.Users
+            .Include(u => u.Role)
+            .Where(u => u.IsActive)
+            .ToListAsync();
+    }
+
     public async Task<Resident?> GetResidentByUserIdAsync(int userId)
     {
         return await _context.Residents
