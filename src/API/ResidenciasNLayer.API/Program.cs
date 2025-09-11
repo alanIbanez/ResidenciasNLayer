@@ -7,21 +7,20 @@ using ResidenciasNLayer.Infrastructure.Data;
 using ResidenciasNLayer.Infrastructure.Repositories;
 using ResidenciasNLayer.Infrastructure.Services;
 using System.Text;
-using Microsoft.OpenApi.Models;
-
+ 
 var builder = WebApplication.CreateBuilder(args);
-
+ 
 // Add services to the container.
 builder.Services.AddControllers();
-
+ 
 // Add Entity Framework
 builder.Services.AddDbContext<ResidenciasDbContext>(options =>
-    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"));
-
+    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+ 
 // Configure JWT Authentication
 var jwtSettings = builder.Configuration.GetSection("Jwt");
 var key = Encoding.ASCII.GetBytes(jwtSettings["Key"]!);
-
+ 
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -43,7 +42,7 @@ builder.Services.AddAuthentication(options =>
         ClockSkew = TimeSpan.Zero
     };
 });
-
+ 
 // Configure Authorization with FallbackPolicy (all endpoints require auth by default)
 builder.Services.AddAuthorization(options =>
 {
@@ -59,20 +58,20 @@ builder.Services.AddAuthorization(options =>
     options.AddPolicy("PreceptorOrTutor", policy => policy.RequireRole("Preceptor", "Tutor"));
     options.AddPolicy("PreceptorOrGuardia", policy => policy.RequireRole("Preceptor", "Guardia"));
 });
-
+ 
 // Configure HttpClient for Expo push notifications
 builder.Services.AddHttpClient("ExpoNotifications", client =>
 {
     client.BaseAddress = new Uri("https://exp.host/");
     client.DefaultRequestHeaders.Add("Accept", "application/json");
 });
-
+ 
 // Register repositories
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IExitRepository, ExitRepository>();
 builder.Services.AddScoped<INotificationRepository, NotificationRepository>();
 builder.Services.AddScoped<IAttendanceRepository, AttendanceRepository>();
-
+ 
 // Register services
 builder.Services.AddScoped<JwtTokenService>();
 builder.Services.AddScoped<IIdentityService, IdentityService>();
@@ -80,54 +79,25 @@ builder.Services.AddScoped<IExitAuthorizationPolicy, ExitAuthorizationPolicy>();
 builder.Services.AddScoped<IExitService, ExitService>();
 builder.Services.AddScoped<INotificationService, NotificationService>();
 builder.Services.AddScoped<IAttendanceService, AttendanceService>();
-
+ 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen(c =>
-{
-    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Residencias API", Version = "v1" });
-
-    // Security definition to enable JWT input via Swagger Authorize button
-    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
-    {
-        Description = "Ingrese el token JWT con el esquema Bearer. Ejemplo: 'Bearer {token}'",
-        Name = "Authorization",
-        In = ParameterLocation.Header,
-        Type = SecuritySchemeType.Http,
-        Scheme = "bearer",
-        BearerFormat = "JWT"
-    });
-
-    c.AddSecurityRequirement(new OpenApiSecurityRequirement
-    {
-        {
-            new OpenApiSecurityScheme
-            {
-                Reference = new OpenApiReference
-                {
-                    Type = ReferenceType.SecurityScheme,
-                    Id = "Bearer"
-                }
-            },
-            Array.Empty<string>()
-        }
-    });
-});
-
+builder.Services.AddSwaggerGen();
+ 
 var app = builder.Build();
-
+ 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
+ 
 app.UseHttpsRedirection();
-
+ 
 app.UseAuthentication();
 app.UseAuthorization();
-
+ 
 app.MapControllers();
-
+ 
 app.Run();
