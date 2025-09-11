@@ -29,6 +29,9 @@ public class NotificationConfiguration : IEntityTypeConfiguration<Notification>
         
         builder.Property(n => n.ProviderMessageId)
             .HasMaxLength(200);
+
+        builder.Property(n => n.ProviderResponse)
+            .HasMaxLength(2000);
         
         // Foreign key relationships
         builder.HasOne(n => n.User)

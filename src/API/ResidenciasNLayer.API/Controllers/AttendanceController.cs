@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ResidenciasNLayer.Application.Interfaces;
 using ResidenciasNLayer.Domain.Entities;
@@ -16,6 +17,7 @@ public class AttendanceController : ControllerBase
     }
 
     [HttpPost]
+    [Authorize(Policy = "PreceptorOrGuardia")]
     public async Task<ActionResult<Attendance>> RegisterAttendance([FromBody] AttendanceRegistrationRequest request)
     {
         try
@@ -35,6 +37,7 @@ public class AttendanceController : ControllerBase
     }
 
     [HttpPost("bulk")]
+    [Authorize(Policy = "PreceptorOrGuardia")]
     public async Task<ActionResult<IEnumerable<Attendance>>> RegisterBulkAttendance([FromBody] BulkAttendanceRequest request)
     {
         try
@@ -49,6 +52,7 @@ public class AttendanceController : ControllerBase
     }
 
     [HttpGet("{id}")]
+    [Authorize]
     public async Task<ActionResult<Attendance>> GetAttendance(int id)
     {
         // This would require additional method in service to get by ID
@@ -56,6 +60,7 @@ public class AttendanceController : ControllerBase
     }
 
     [HttpGet("resident/{residentId}")]
+    [Authorize]
     public async Task<ActionResult<IEnumerable<Attendance>>> GetAttendanceByResident(
         int residentId,
         [FromQuery] DateTime? fromDate = null,

@@ -8,8 +8,9 @@ public class Notification
     public string Body { get; set; } = null!;
     public DateTime SentAt { get; set; } = DateTime.UtcNow;
     public bool IsRead { get; set; } = false;
-    public string? Status { get; set; } // sent, delivered, failed
+    public string? Status { get; set; } // pending, sent, delivered, failed
     public string? ProviderMessageId { get; set; }
+    public string? ProviderResponse { get; set; }
     
     // Foreign keys
     public int UserId { get; set; }
